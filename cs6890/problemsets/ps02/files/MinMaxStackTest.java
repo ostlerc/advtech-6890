@@ -3,14 +3,13 @@ package cs6890.problemsets.ps02.files;
 import static org.junit.Assert.*;
 
 import java.util.EmptyStackException;
+import java.lang.IllegalStateException;
+import java.lang.IllegalArgumentException;
 
 import org.junit.Test;
 
 /**
  * JUnit tests for MinMaxStack.
- * 
- * These simple tests found one bug, which was fixed.
- * Can you confirm that the implementation is 100% correct?
  * 
  * @version Thu, Jan 29, 2015
  */
@@ -67,14 +66,12 @@ public class MinMaxStackTest {
         // make sure the minimum is correct...
         MinMaxStack stack = new MinMaxStack(data.length);
 
-        for(int i = 0; i < data.length; i++)
-        {
+        for(int i = 0; i < data.length; i++) {
             stack.push(data[i]);
             assertEquals(mins[i], stack.getMin());
         }
 
-        for(int i = data.length-1; i >= 0; i--)
-        {
+        for(int i = data.length-1; i >= 0; i--) {
             assertEquals(stack.getMin(), mins[i]);
 
             int e = stack.pop();
@@ -82,7 +79,7 @@ public class MinMaxStackTest {
         }
     }
 
-    @Test(expected=EmptyStackException .class)
+    @Test(expected=EmptyStackException.class)
     public void testGetMinFromEmptyStack() {
         MinMaxStack stack = new MinMaxStack(10);
         stack.getMin();
@@ -96,14 +93,12 @@ public class MinMaxStackTest {
         // make sure the minimum is correct...
         MinMaxStack stack = new MinMaxStack(data.length);
 
-        for(int i = 0; i < data.length; i++)
-        {
+        for(int i = 0; i < data.length; i++) {
             stack.push(data[i]);
             assertEquals(maxs[i], stack.getMax());
         }
 
-        for(int i = data.length-1; i >= 0; i--)
-        {
+        for(int i = data.length-1; i >= 0; i--) {
             assertEquals(stack.getMax(), maxs[i]);
 
             int e = stack.pop();
@@ -111,7 +106,7 @@ public class MinMaxStackTest {
         }
     }
 
-    @Test(expected=EmptyStackException .class)
+    @Test(expected=EmptyStackException.class)
         public void testGetMaxFromEmptyStack() {
             MinMaxStack stack = new MinMaxStack(10);
             stack.getMax();
