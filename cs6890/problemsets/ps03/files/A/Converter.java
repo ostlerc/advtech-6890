@@ -25,32 +25,42 @@ public class Converter {
 			throw new NumberFormatException();
 		
 		int sum = 0;
-		int sign = 1;
+		boolean neg = false;
+        final int base = 10;
+        int MaxTest =  Integer.MAX_VALUE / base;
+        int MaxDigit = Integer.MAX_VALUE % base;
 
-		// TODO: don't use substring (it's not efficient)
+		int start = 0;
 		if (s.charAt(0) == '-') {
-			sign = -1;
-			s = s.substring(1);
+			neg = true;
+			start = 1;
 		}
-		else if (s.charAt(0) == '+') {
-			s = s.substring(1);
-		} 
+		else if (s.charAt(0) == '+')
+			start = 1;
+
+        if(neg) { // two's complement : negative numbers hold 1 more than positive
+            MaxDigit++;
+        }
 			
-		if (s.length() == 0)
+		if (s.length() == start)
 			throw new NumberFormatException();
 			
-		// TODO: read digits from left to right...?
-		for (int i = s.length() - 1; i >= 0; i--) {
+		for (int i = start; i < s.length(); i++) {
 			
 			char ch = s.charAt(i);
 			if (!Character.isDigit(ch))
 				throw new NumberFormatException();
 			
-			int digit = ch - '0';
-			sum += digit * Math.pow(10, s.length() - 1 - i);
+            int digit = ch - '0';
+			if(sum > MaxTest || (sum == MaxTest && digit > MaxDigit)) {
+                throw new NumberFormatException();
+            }
+
+            sum *= base;
+			sum += digit;
 		}
 		
-		return sum * sign;
+		return neg ? -sum : sum;
 	}
 	
 }

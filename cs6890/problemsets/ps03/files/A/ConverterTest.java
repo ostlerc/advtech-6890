@@ -95,6 +95,7 @@ public class ConverterTest {
 	@Test(expected=NumberFormatException.class)
 	public void testIntUnderflow() {
 		long num = ((long) Integer.MIN_VALUE) - 1;
-		Converter.toInt(String.valueOf(num));
+		int answer = Converter.toInt(String.valueOf(num));
+
 	}
 }
