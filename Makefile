@@ -31,6 +31,7 @@ PS03=cs6890.problemsets.ps03.files
 
 JFLAGS = -cp $(JARS):.
 JC = javac
+JR = java
 
 default: all
 
@@ -47,14 +48,14 @@ all: $(JUNIT) $(HAMCREST)
 setup: $(JUNIT) $(HAMCREST)
 
 a: $(JUNIT) $(HAMCREST) $(ASRC:.java=.class)
-	java $(JFLAGS) $(RUNNER) $(PS03).A.ConverterTest
-	java $(JFLAGS) $(RUNNER) $(PS03).A.ConverterStressTest
+	$(JR) $(JFLAGS) $(RUNNER) $(PS03).A.ConverterTest
+	$(JR) $(JFLAGS) $(RUNNER) $(PS03).A.ConverterStressTest
 
 b: $(JUNIT) $(HAMCREST) $(BSRC:.java=.class)
-	java $(JFLAGS) $(RUNNER) $(PS03).B.CompactBooleanArrayTest
+	$(JR) $(JFLAGS) $(RUNNER) $(PS03).B.CompactBooleanArrayTest
 
 c: $(JUNIT) $(HAMCREST) $(CSRC:.java=.class)
-	java $(JFLAGS) $(RUNNER) $(PS03).C.BlocksTest
+	$(JR) $(JFLAGS) $(RUNNER) $(PS03).C.BlocksTest
 
 $(JUNIT):
 	wget http://search.maven.org/remotecontent?filepath=junit/junit/4.12/junit-4.12.jar -O $(JUNIT)

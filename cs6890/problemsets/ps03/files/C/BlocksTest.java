@@ -6,9 +6,9 @@ import org.junit.Test;
 
 /**
  * CS 6890 Spring 2015, Problem Set 3.
- * 
+ *
  * JUnit tests for Blocks.
- * 
+ *
  * @version Sat, Feb 21, 2015
  */
 public class BlocksTest {
