@@ -40,7 +40,7 @@ default: all
 
 classes: $(ALLSRC:.java=.class)
 
-# parallel compile support, first game classes then tests can be built
+# parallel compile support, first setup then classes can be built
 all: $(JUNIT) $(HAMCREST)
 	$(MAKE) setup
 	$(MAKE) classes

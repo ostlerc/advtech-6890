@@ -24,7 +24,7 @@ import java.lang.*;
  */
 public class Blocks {
 
-    private static HashMap<Long, Boolean> memos;
+    private static Map<Long, Boolean> memos;
     private static Queue<Character[][]> queue;
 
 	/**

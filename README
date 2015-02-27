@@ -1,0 +1,9 @@
+to run problemset a,b,c you can use the following commands:
+
+make a
+make b
+make c
+
+to clean up afterwards
+
+make clean
