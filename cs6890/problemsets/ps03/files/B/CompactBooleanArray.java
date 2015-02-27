@@ -54,7 +54,6 @@ package cs6890.problemsets.ps03.files.B;
  */
 public class CompactBooleanArray {
 
-    final int INTSIZE = 32;
 	private int size;		// number of values that can be stored
 	private int[] array;	// array for storing values
 
@@ -86,9 +85,9 @@ public class CompactBooleanArray {
 	public int getArraySize() {
 	    if(size == 0)
 	        return 0;
-	    if(size % INTSIZE != 0)
-	        return size/INTSIZE + 1;
-        return size/INTSIZE;
+	    if(size % Integer.SIZE != 0)
+	        return size/Integer.SIZE + 1;
+        return size/Integer.SIZE;
 	}
 
 	/**
@@ -96,7 +95,7 @@ public class CompactBooleanArray {
 	 */
 	public boolean get(int idx) throws IndexOutOfBoundsException {
         int array_idx = getArrayIndex(idx);
-	    int mask = 1 << (idx % INTSIZE);
+	    int mask = 1 << (idx % Integer.SIZE);
 		return (array[array_idx]&mask) != 0;
 	}
 
@@ -105,7 +104,7 @@ public class CompactBooleanArray {
 	 */
 	public void set(int idx, boolean value) throws IndexOutOfBoundsException {
         int array_idx = getArrayIndex(idx);
-        int mask = 1 << (idx % INTSIZE);
+        int mask = 1 << (idx % Integer.SIZE);
         if(value) {
             array[array_idx] |= mask;
         } else {
@@ -119,7 +118,7 @@ public class CompactBooleanArray {
 	 */
 	public void negate(int idx) throws IndexOutOfBoundsException {
         int array_idx = getArrayIndex(idx);
-        int mask = 1 << (idx % INTSIZE);
+        int mask = 1 << (idx % Integer.SIZE);
         array[array_idx] ^= mask;
 	}
 
@@ -134,7 +133,7 @@ public class CompactBooleanArray {
 	 * Returns the index for the bit at index idx
 	 */
 	private int getArrayIndex(int idx) throws IndexOutOfBoundsException {
-        int array_idx = idx / INTSIZE;
+        int array_idx = idx / Integer.SIZE;
         if(idx < 0 || idx >= size || array_idx < 0 || array_idx >= getArraySize())
             throw new IndexOutOfBoundsException();
         return array_idx;

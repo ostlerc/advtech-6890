@@ -24,18 +24,18 @@ import java.lang.*;
  */
 public class Blocks {
 
-    private static HashSet<String> memos;
+    private static HashMap<Long, Boolean> memos;
     private static Queue<Character[][]> queue;
 
 	/**
 	 * Count the number of configurations reachable on a board.
 	 */
 	public static int countConfigs(Character[][] orig_board) {
-	    memos = new HashSet<String>();
+	    memos = new HashMap<Long, Boolean>();
         queue = new LinkedList<Character[][]>();
 
         queue.add(copyBoard(orig_board));
-        memos.add(boardStr(orig_board));
+        memos.put(hash(orig_board), true);
 
         int ret = 0;
         while(!queue.isEmpty()) {
@@ -80,32 +80,31 @@ public class Blocks {
         if(board[i][j] != '.')
             return false;
         board[i][j] = at;
-        String board_str = boardStr(board);
-        if(!memos.contains(board_str)) {
+        Long hash = hash(board);
+        if(!memos.containsKey(hash)) {
             Character[][] newBoard = copyBoard(board);
-            memos.add(board_str);
+            memos.put(hash, true);
             queue.add(newBoard);
         }
         board[i][j] = '.';
         return true;
     }
 
-    private static String boardStr(Character[][] board) {
-        StringBuilder s = new StringBuilder();
-        for(int i = 0; i < board.length; i++) {
-            for(int j = 0; j < board[i].length; j++)
-                s.append(board[i][j]);
-        }
-        return s.toString();
-    }
-
     private static Character[][] copyBoard(Character[][] board) {
         Character[][] copy = new Character[board.length][];
         for(int i = 0; i < board.length; i++) {
-            copy[i] = new Character[board[i].length];
-            for(int j = 0; j < board[i].length; j++)
-                copy[i][j] = board[i][j];
+            copy[i] = Arrays.copyOf(board[i], board[i].length);
         }
         return copy;
+    }
+
+    public static long hash(Character[][] board) {
+        long h = 1125899906842597L; // prime
+
+        for(int i = 0; i < board.length; i++) {
+            for(int j = 0; j < board[i].length; j++)
+            h = 31*h + board[i][j];
+        }
+        return h;
     }
 }
