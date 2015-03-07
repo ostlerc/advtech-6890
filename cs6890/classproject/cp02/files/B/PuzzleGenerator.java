@@ -35,7 +35,6 @@ public class PuzzleGenerator {
 	        for( int j =0; j < cols; j++) {
 	            board[i][j] = '.';
 	            genConfigs(0, 0, false, board, allConfigs);
-                System.out.format("so far %d%n", allConfigs.size());
                 board[i][j] = ' ';
             }
         }
@@ -52,21 +51,20 @@ public class PuzzleGenerator {
 	private static void genConfigs(int i, int j, boolean has_t, Character[][] board, List<Character[][]> configs) {
 	    //base case
         if(j == cols - 1 && i == rows - 1) {
-            if(has_t) {
-                if(board[i][j] == ' ') {
+            if(board[i][j] == ' ') {
+                if(has_t) {
                     board[i][j] = 'H';
                     configs.add(copyBoard(board));
-                    printBoard(board);
                     board[i][j] = 'V';
                     configs.add(copyBoard(board));
-                    printBoard(board);
-                    board[i][j] = ' ';
                 } else {
+                    board[i][j] = 'T';
                     configs.add(copyBoard(board));
-                    printBoard(board);
                 }
+                board[i][j] = ' ';
+            } else if(has_t) {
+                configs.add(copyBoard(board));
             }
-            //System.out.format("i %d j %d has_t %s count=%d%n", i, j, has_t ? "true" : "false", configs.size());
             return;
         }
 
@@ -82,7 +80,7 @@ public class PuzzleGenerator {
         }
 
         if(board[i][j] == ' ') {
-            if(!has_t && j != cols - 1) {
+            if(!has_t) {
                 board[i][j] = 'T';
                 genConfigs(next_i, next_j, true, board, configs);
             }
@@ -103,14 +101,5 @@ public class PuzzleGenerator {
             copy[x] = board[x].clone();
         }
         return copy;
-    }
-
-    private static void printBoard(Character[][] board) {
-        for(int i = 0; i < rows; i++) {
-            for( int j = 0; j < cols; j++)
-                System.out.format("%c", board[i][j]);
-            System.out.print("\n");
-        }
-        System.out.print("\n");
     }
 }
