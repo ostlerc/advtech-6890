@@ -70,13 +70,13 @@ a:
 	$(MAKE) cp2a
 
 b:
-		$(MAKE) cp2b
+	$(MAKE) cp2b
 
 c:
-		$(MAKE) cp2c
+	$(MAKE) cp2c
 
 d:
-		$(MAKE) cp2d
+	$(MAKE) cp2d
 
 cp2a: $(JUNIT) $(HAMCREST) $(CP2ASRC:.java=.class)
 	$(JR) $(JFLAGS) $(RUNNER) $(CP).cp02.files.A.PuzzleSolverTest
@@ -84,7 +84,7 @@ cp2a: $(JUNIT) $(HAMCREST) $(CP2ASRC:.java=.class)
 cp2b: $(JUNIT) $(HAMCREST) $(CP2BSRC:.java=.class)
 	$(JR) $(JFLAGS) $(RUNNER) $(CP).cp02.files.B.PuzzleGeneratorTest
 
-cp2c: $(JUNIT) $(HAMCREST) $(CP2CSRC:.java=.class)
+cp2c: $(JUNIT) $(HAMCREST) $(CP2ASRC:.java=.class) $(CP2BSRC:.java=.class) $(CP2CSRC:.java=.class)
 	$(JR) $(JFLAGS) $(RUNNER) $(CP).cp02.files.C.PuzzleStatsTest
 
 cp2d: $(JUNIT) $(HAMCREST) $(CP2CSRC:.java=.class)

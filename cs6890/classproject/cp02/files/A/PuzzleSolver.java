@@ -33,8 +33,11 @@ public class PuzzleSolver {
       */
     public static int solvePuzzle(Character[][] orig_board) {
 
-        if(orig_board[0].length == 1)
-            return 0;
+        int cols = orig_board[0].length;
+        for(int i = 0; i < orig_board.length; i++) {
+            if(orig_board[i][cols-1] == 'T')
+                return 0;
+        }
 
         memos = new HashMap<Long, Boolean>();
         queue = new LinkedList<BoardMove>();
