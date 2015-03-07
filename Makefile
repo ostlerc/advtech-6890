@@ -1,6 +1,7 @@
 .PHONY : all setup classes clean
 .PHONY : ps3 ps3a ps3b ps3c
 .PHONY : cp2 cp2a cp2b cp2c cp2d
+.PHONY : a b c
 
 PSDIR=cs6890/problemsets
 CPDIR=cs6890/classproject
@@ -64,6 +65,15 @@ cp2:
 	$(MAKE) cp2b
 	$(MAKE) cp2c
 	$(MAKE) cp2d
+
+a:
+	$(MAKE) cp2a
+
+b:
+		$(MAKE) cp2b
+
+c:
+		$(MAKE) cp2c
 
 cp2a: $(JUNIT) $(HAMCREST) $(CP2ASRC:.java=.class)
 	$(JR) $(JFLAGS) $(RUNNER) $(CP).cp02.files.A.PuzzleSolverTest
