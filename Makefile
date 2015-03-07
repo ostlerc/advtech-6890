@@ -1,24 +1,20 @@
-.PHONY : all setup classes a b c clean
+.PHONY : all setup classes clean
+.PHONY : ps3 ps3a ps3b ps3c
+.PHONY : cp2 cp2a cp2b cp2c cp2d
 
-FILESDIR=cs6890/problemsets/ps03/files
+PSDIR=cs6890/problemsets
+CPDIR=cs6890/classproject
 
-ASRC= \
-	$(FILESDIR)/A/Converter.java \
-	$(FILESDIR)/A/ConverterStressTest.java \
-	$(FILESDIR)/A/ConverterTest.java
+PS3ASRC := $(wildcard $(PSDIR)/ps03/files/A/*.java)
+PS3BSRC := $(wildcard $(PSDIR)/ps03/files/B/*.java)
+PS3CSRC := $(wildcard $(PSDIR)/ps03/files/C/*.java)
 
-BSRC= \
-	$(FILESDIR)/B/CompactBooleanArray.java \
-	$(FILESDIR)/B/CompactBooleanArrayTest.java
+CP2ASRC := $(wildcard $(CPDIR)/cp02/files/A/*.java)
+CP2BSRC := $(wildcard $(CPDIR)/cp02/files/B/*.java)
+CP2CSRC := $(wildcard $(CPDIR)/cp02/files/C/*.java)
+CP2DSRC := $(wildcard $(CPDIR)/cp02/files/D/*.java)
 
-CSRC= \
-	$(FILESDIR)/C/Blocks.java \
-	$(FILESDIR)/C/BlocksTest.java
-
-ALLSRC= \
-	  $(ASRC) \
-	  $(BSRC) \
-	  $(CSRC)
+ALLSRC:= $(shell find . -name '*.java')
 
 .SUFFIXES: .java .class
 
@@ -27,7 +23,8 @@ HAMCREST=hamcrest-core-1.3.jar
 
 JARS=$(HAMCREST):$(JUNIT)
 RUNNER=org.junit.runner.JUnitCore
-PS03=cs6890.problemsets.ps03.files
+PS=cs6890.problemsets
+CP=cs6890.classproject
 
 JFLAGS = -cp $(JARS):.
 JC = javac
@@ -47,15 +44,38 @@ all: $(JUNIT) $(HAMCREST)
 
 setup: $(JUNIT) $(HAMCREST)
 
-a: $(JUNIT) $(HAMCREST) $(ASRC:.java=.class)
-	$(JR) $(JFLAGS) $(RUNNER) $(PS03).A.ConverterTest
-	$(JR) $(JFLAGS) $(RUNNER) $(PS03).A.ConverterStressTest
+ps3:
+	$(MAKE) ps3a
+	$(MAKE) ps3b
+	$(MAKE) ps3c
 
-b: $(JUNIT) $(HAMCREST) $(BSRC:.java=.class)
-	$(JR) $(JFLAGS) $(RUNNER) $(PS03).B.CompactBooleanArrayTest
+ps3a: $(JUNIT) $(HAMCREST) $(PS3ASRC:.java=.class)
+	$(JR) $(JFLAGS) $(RUNNER) $(PS).ps03.files.A.ConverterTest
+	$(JR) $(JFLAGS) $(RUNNER) $(PS).ps03.files.A.ConverterStressTest
 
-c: $(JUNIT) $(HAMCREST) $(CSRC:.java=.class)
-	$(JR) $(JFLAGS) $(RUNNER) $(PS03).C.BlocksTest
+ps3b: $(JUNIT) $(HAMCREST) $(PS3BSRC:.java=.class)
+	$(JR) $(JFLAGS) $(RUNNER) $(PS).ps03.files.B.CompactBooleanArrayTest
+
+ps3c: $(JUNIT) $(HAMCREST) $(PS3CSRC:.java=.class)
+	$(JR) $(JFLAGS) $(RUNNER) $(PS).ps03.files.C.BlocksTest
+
+cp2:
+	$(MAKE) cp2a
+	$(MAKE) cp2b
+	$(MAKE) cp2c
+	$(MAKE) cp2d
+
+cp2a: $(JUNIT) $(HAMCREST) $(CP2ASRC:.java=.class)
+	$(JR) $(JFLAGS) $(RUNNER) $(CP).cp02.files.A.PuzzleSolverTest
+
+cp2b: $(JUNIT) $(HAMCREST) $(CP2BSRC:.java=.class)
+	$(JR) $(JFLAGS) $(RUNNER) $(CP).cp02.files.B.PuzzleGeneratorTest
+
+cp2c: $(JUNIT) $(HAMCREST) $(CP2CSRC:.java=.class)
+	$(JR) $(JFLAGS) $(RUNNER) $(CP).cp02.files.C.PuzzleStatsTest
+
+cp2d: $(JUNIT) $(HAMCREST) $(CP2CSRC:.java=.class)
+	$(JR) $(JFLAGS) $(RUNNER) $(CP).cp02.files.D.PuzzleTest
 
 $(JUNIT):
 	wget http://search.maven.org/remotecontent?filepath=junit/junit/4.12/junit-4.12.jar -O $(JUNIT)
