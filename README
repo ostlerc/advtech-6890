@@ -5,10 +5,10 @@ TEST: to run all tests for class project 2
     make cp2
 
 to run individual a,b,c,d you can use the following commands:
-    make cp2a
-    make cp2b
-    make cp2c
-    make cp2d
+    make a
+    make b
+    make c
+    make d
 
 CLEAN: to clean up afterwards
     make clean

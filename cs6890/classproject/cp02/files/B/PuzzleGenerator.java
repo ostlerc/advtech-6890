@@ -73,8 +73,7 @@ public class PuzzleGenerator {
 
         if(j != cols - 1)
             next_j++;
-        else
-        {
+        else {
             next_i++;
             next_j = 0;
         }

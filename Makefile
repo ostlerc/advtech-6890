@@ -1,7 +1,7 @@
 .PHONY : all setup classes clean
 .PHONY : ps3 ps3a ps3b ps3c
 .PHONY : cp2 cp2a cp2b cp2c cp2d
-.PHONY : a b c
+.PHONY : a b c d
 
 PSDIR=cs6890/problemsets
 CPDIR=cs6890/classproject
@@ -46,18 +46,22 @@ all: $(JUNIT) $(HAMCREST)
 setup: $(JUNIT) $(HAMCREST)
 
 ps3:
+	$(MAKE) setup
 	$(MAKE) ps3a
 	$(MAKE) ps3b
 	$(MAKE) ps3c
 
 ps3a: $(JUNIT) $(HAMCREST) $(PS3ASRC:.java=.class)
+	$(MAKE) setup
 	$(JR) $(JFLAGS) $(RUNNER) $(PS).ps03.files.A.ConverterTest
 	$(JR) $(JFLAGS) $(RUNNER) $(PS).ps03.files.A.ConverterStressTest
 
 ps3b: $(JUNIT) $(HAMCREST) $(PS3BSRC:.java=.class)
+	$(MAKE) setup
 	$(JR) $(JFLAGS) $(RUNNER) $(PS).ps03.files.B.CompactBooleanArrayTest
 
 ps3c: $(JUNIT) $(HAMCREST) $(PS3CSRC:.java=.class)
+	$(MAKE) setup
 	$(JR) $(JFLAGS) $(RUNNER) $(PS).ps03.files.C.BlocksTest
 
 cp2:
@@ -67,15 +71,19 @@ cp2:
 	$(MAKE) cp2d
 
 a:
+	$(MAKE) setup
 	$(MAKE) cp2a
 
 b:
+	$(MAKE) setup
 	$(MAKE) cp2b
 
 c:
+	$(MAKE) setup
 	$(MAKE) cp2c
 
 d:
+	$(MAKE) setup
 	$(MAKE) cp2d
 
 cp2a: $(JUNIT) $(HAMCREST) $(CP2ASRC:.java=.class)
@@ -87,8 +95,11 @@ cp2b: $(JUNIT) $(HAMCREST) $(CP2BSRC:.java=.class)
 cp2c: $(JUNIT) $(HAMCREST) $(CP2ASRC:.java=.class) $(CP2BSRC:.java=.class) $(CP2CSRC:.java=.class)
 	$(JR) $(JFLAGS) $(RUNNER) $(CP).cp02.files.C.PuzzleStatsTest
 
-cp2d: $(JUNIT) $(HAMCREST) $(CP2CSRC:.java=.class)
-	$(JR) $(JFLAGS) $(RUNNER) $(CP).cp02.files.D.PuzzleTest
+cp2d: $(JUNIT) $(HAMCREST) $(CP2ASRC:.java=.class) $(CP2BSRC:.java=.class) $(CP2CSRC:.java=.class) $(CP2DSRC:.java=.class)
+	$(JR) $(JFLAGS) $(RUNNER) $(CP).cp02.files.D.PuzzlesTest
+
+cp2dfind: $(JUNIT) $(HAMCREST) $(CP2ASRC:.java=.class) $(CP2BSRC:.java=.class) $(CP2CSRC:.java=.class) $(CP2DSRC:.java=.class)
+	$(JR) $(JFLAGS) $(CP).cp02.files.D.PuzzleFinder
 
 $(JUNIT):
 	wget http://search.maven.org/remotecontent?filepath=junit/junit/4.12/junit-4.12.jar -O $(JUNIT)

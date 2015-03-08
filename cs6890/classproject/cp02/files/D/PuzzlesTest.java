@@ -20,53 +20,53 @@ public class PuzzlesTest {
 
 	@Test
 	public void test4x4_20_29() {
-		Character[][] board = {{'.', '.', '.', '.'},
-		                       {'.', '.', '.', '.'},
-		                       {'.', '.', '.', '.'},
-		                       {'.', '.', '.', '.'}};
+		Character[][] board = {{'T', '.', 'V', '.'},
+		                       {'H', 'V', 'V', 'H'},
+		                       {'H', 'V', 'H', 'V'},
+		                       {'V', 'H', 'H', 'H'}};
+
 		int moves = PuzzleSolver.solvePuzzle(board);
 		assertTrue(moves >= 20 && moves < 30);
 	}
-
 	@Test
 	public void test4x4_30_39() {
-		Character[][] board = {{'.', '.', '.', '.'},
-		                       {'.', '.', '.', '.'},
-		                       {'.', '.', '.', '.'},
-		                       {'.', '.', '.', '.'}};
+		Character[][] board = {{'.', 'V', 'V', 'H'},
+		                       {'V', 'T', 'V', 'V'},
+		                       {'H', '.', 'V', 'H'},
+		                       {'H', 'V', 'H', 'V'}};
 		int moves = PuzzleSolver.solvePuzzle(board);
 		assertTrue(moves >= 30 && moves < 39);
 	}
 
 	@Test
 	public void test4x4_40() {
-		Character[][] board = {{'.', '.', '.', '.'},
-		                       {'.', '.', '.', '.'},
-		                       {'.', '.', '.', '.'},
-		                       {'.', '.', '.', '.'}};
+		Character[][] board = {{'V', 'H', 'H', 'V'},
+		                       {'T', '.', 'V', 'V'},
+		                       {'H', 'V', 'V', 'H'},
+		                       {'.', 'V', 'V', 'H'}};
 		int moves = PuzzleSolver.solvePuzzle(board);
 		assertEquals(40, moves);
 	}
 
 	@Test
 	public void test5x5_100() {
-		Character[][] board = {{'.', '.', '.', '.', '.'},
-		                       {'.', '.', '.', '.', '.'},
-		                       {'.', '.', '.', '.', '.'},
-		                       {'.', '.', '.', '.', '.'},
-		                       {'.', '.', '.', '.', '.'}};
+		Character[][] board = {{'H', 'H', 'V', 'H', 'V'},
+		                       {'V', 'H', 'H', 'V', 'V'},
+		                       {'V', 'V', 'H', '.', 'H'},
+		                       {'T', 'V', 'V', 'V', 'V'},
+		                       {'V', 'V', 'H', 'V', 'V'}};
 		int moves = PuzzleSolver.solvePuzzle(board);
 		assertTrue(moves >= 100);
 	}
 
 	@Test
 	public void test4x5_87() {
-		Character[][] board = {{'.', '.', '.', '.', '.'},
-		                       {'.', '.', '.', '.', '.'},
-		                       {'.', '.', '.', '.', '.'},
-		                       {'.', '.', '.', '.', '.'}};
+		Character[][] board = {{'H', 'H', 'V', 'H', 'H'},
+		                       {'V', 'V', 'H', 'V', 'V'},
+		                       {'T', 'V', 'V', 'V', 'V'},
+		                       {'V', '.', 'H', 'V', '.'}};
+
 		int moves = PuzzleSolver.solvePuzzle(board);
 		assertEquals(87, moves);
 	}
-
 }
