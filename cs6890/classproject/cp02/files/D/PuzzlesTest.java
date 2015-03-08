@@ -65,6 +65,25 @@ public class PuzzlesTest {
 		                       {'V', 'V', 'H', 'V', 'V'},
 		                       {'T', 'V', 'V', 'V', 'V'},
 		                       {'V', '.', 'H', 'V', '.'}};
+//HHVHH
+//V.HV.
+//TVVVV
+//VVHVV
+
+//HHVHH
+//VVHVV
+//T.VV.
+//VVHVV
+
+//VVHVV
+//TVVVV
+//VHVV.
+//.HHHH
+
+//V.HV.
+//TVVVV
+//VVHVV
+//HHVHH
 
 		int moves = PuzzleSolver.solvePuzzle(board);
 		assertEquals(87, moves);
